@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { getCentersData } from "./Common/API";
+import Date from "./Component/Date";
+import Table from "./Component/Table";
+import { useState } from "react";
 
 function App() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const CentresData = async (date) => {
+    const datas = await getCentersData(date);
+    setLoading(false);
+    setData(datas);
+  };
+  CentresData("20-05-2022");
+  if (loading) return <h1>Loading</h1>;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div>
+        <Date CentresData={CentresData} />
+      </div>
+      {data && <Table data={data} />}
     </div>
   );
 }
