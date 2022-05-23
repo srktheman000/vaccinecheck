@@ -21,7 +21,6 @@ function Date(props) {
   // }
 
   const clickHandler = () => {
-    console.log(date);
     props.CentresData(date);
   };
 

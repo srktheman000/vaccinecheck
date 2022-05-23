@@ -1,7 +1,7 @@
 import { getCentersData } from "./Common/API";
 import Date from "./Component/Date";
 import Table from "./Component/Table";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [data, setData] = useState([]);
@@ -12,7 +12,11 @@ function App() {
     setLoading(false);
     setData(datas);
   };
-  CentresData("20-05-2022");
+
+  useEffect(() => {
+    CentresData("20-05-2022");
+  }, []);
+
   if (loading) return <h1>Loading</h1>;
   return (
     <div className="container">
